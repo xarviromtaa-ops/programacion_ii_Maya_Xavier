@@ -1,32 +1,29 @@
-nave= "caza estelar N-1"
-planeta =  "Naboo"
-velocidad =  850.0
+nave = "caza estelar nº1"
+planeta = "Tatooine"
+velocidad = 10.6
 cantidad_motores = 2
-escudos_activados = True
 piloto_asignado = None
 
-print("Nave:", nave)
+print("Nave:", nave)   
 print("Planeta:", planeta)
 print("Velocidad:", velocidad)
 print("Cantidad de motores:", cantidad_motores)
-print("Escudos activados:", escudos_activados)
 print("Piloto asignado:", piloto_asignado)
-# comprobante de tipos
-print("Tipo de Nave:", type(nave))
-print("Tipo de Planeta:", type(planeta))
-print("Tipo de Velocidad:", type(velocidad))
-print("Tipo de Cantidad de motores:", type(cantidad_motores))          
-print("Tipo de Escudos activados:", type(escudos_activados))
-print("Tipo de Piloto asignado:", type(piloto_asignado))
+#comprobamos tipos
+print("Tipo de nave:", type(nave))
+print("Tipo de planeta:", type(planeta))
+print("Tipo de velocidad:", type(velocidad))
+print("Tipo de cantidad de motores:", type(cantidad_motores))  
+print("Tipo de piloto asignado:", type(piloto_asignado))
 
-droide = "R2-D2"  
+droide = "R2-D2"
+print("Tipo de droide:", type(droide))
 print("Droide:", droide)
-print("Tipo de Droide:", type(droide))
 
-droide =  42
+droide = 2
+print("Tipo de droide:", type(droide))
 print("Droide:", droide)
-print("Tipo de Droide:", type(droide))
 
 droide = True
+print("Tipo de droide:", type(droide))     
 print("Droide:", droide)
-print("Tipo de Droide:", type(droide))
