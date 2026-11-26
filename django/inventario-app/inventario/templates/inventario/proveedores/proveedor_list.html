@@ -1,0 +1,50 @@
+{% extends 'inventario/base.html' %}
+
+{% block title %}Lista de Proveedores{% endblock %}
+
+{% block content %}
+    <h1>Lista de Proveedores</h1>
+
+    {% if perms.inventario.add_proveedor %}
+        <p><a href="{% url 'proveedor_create' %}">Registrar proveedor</a></p>
+    {% endif %}
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>RUC</th>
+                <th>Telefono</th>
+                <th>Correo</th>
+                <th>Ciudad</th>
+                <th>Fecha de Registro</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for proveedor in proveedores %}
+            <tr>
+                <td><a href="{% url 'proveedor_detail' proveedor.pk %}">{{ proveedor.nombre }}</a></td>
+                <td>{{ proveedor.ruc }}</td>
+                <td>{{ proveedor.telefono }}</td>
+                <td>{{ proveedor.correo }}</td>
+                <td>{{ proveedor.ciudad }}</td>
+                <td>{{ proveedor.fecha_registro }}</td>
+                <td>
+                    <a href="{% url 'proveedor_detail' proveedor.pk %}">Ver</a>
+                    {% if perms.inventario.change_proveedor %}
+                        | <a href="{% url 'proveedor_update' proveedor.pk %}">Editar</a>
+                    {% endif %}
+                    {% if perms.inventario.delete_proveedor %}
+                        | <a href="{% url 'proveedor_delete' proveedor.pk %}">Eliminar</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7">No hay provedores registrados</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

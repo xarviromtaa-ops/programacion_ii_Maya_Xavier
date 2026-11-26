@@ -1,51 +1,196 @@
-# Programación II
+Programación II - Control de Proyectos y Subproyectos
 
-## AUTOR
+📌 Descripción
 
-**Xavier Maya**   
+Este proyecto corresponde a la materia Programación II y tiene como objetivo desarrollar una estructura para el control y seguimiento de proyectos y subproyectos, utilizando tecnologías como Python, Django y Odoo.
 
+El sistema permitirá organizar proyectos, subproyectos, responsables, estados, fechas y tareas, manteniendo una estructura ordenada y preparada para trabajar con Git y GitHub.
 
-Repositorio correspondiente a la materia **Programación II**.
+🎯 Objetivo general
 
-En este repositorio se almacenarán los proyectos, prácticas, ejercicios y subproyectos desarrollados durante la materia, utilizando principalmente **Python, Django y Odoo**.
+Desarrollar una aplicación para administrar y controlar proyectos y subproyectos, aplicando conceptos de programación, desarrollo web, bases de datos y sistemas empresariales.
 
-## 🐍 Python
+🛠️ Tecnologías utilizadas
 
-**Python** es un lenguaje de programación de alto nivel, conocido por su sintaxis sencilla y fácil de aprender. Se utilizará como base para desarrollar ejercicios, programas y aplicaciones durante la materia.
+Python - Lenguaje principal de programación.
 
-## 🌐 Django
+Django - Framework para el desarrollo de la aplicación web.
 
-**Django** es un framework web desarrollado en Python que permite crear aplicaciones y sitios web de manera organizada y rápida. Incluye herramientas para trabajar con bases de datos, usuarios, URLs, formularios y otras funcionalidades web.
+Odoo - Plataforma empresarial para la gestión e integración de módulos.
 
-## 🏢 Odoo
+Git - Control de versiones.
 
-**Odoo** es una plataforma de gestión empresarial de código abierto que permite desarrollar y utilizar módulos para administrar diferentes áreas de una empresa, como ventas, inventario, compras, contabilidad y recursos humanos.
+GitHub - Repositorio remoto del proyecto.
 
-## 📂 Estructura del repositorio
+SQLite - Base de datos para el desarrollo inicial.
 
-```text
-Programacion-II/
-│
-├── Python/
-│   ├── proyectos/
-│   └── ejercicios/
-│
-├── Django/
-│   ├── proyectos/
-│   └── ejercicios/
-│
-├── Odoo/
-│   ├── modulos/
-│   └── proyectos/
-│
-├── .gitignore
-└── README.md
-```
+📁 Estructura del proyecto
 
-## 🎯 Objetivo
+programacion_ii_Maya_Xavier/ │ ├── .gitignore ├── README.md ├── requirements.txt │ ├── python/ │ ├── main.py │ └── models.py │ ├── django_app/ │ ├── manage.py │ │ │ ├── config/ │ │ ├── init.py │ │ ├── settings.py │ │ ├── urls.py │ │ └── wsgi.py │ │ │ └── proyectos/ │ ├── init.py │ ├── admin.py │ ├── apps.py │ ├── models.py │ ├── views.py │ ├── urls.py │ └── migrations/ │ ├── odoo_module/ │ ├── init.py │ ├── manifest.py │ ├── models/ │ ├── views/ │ ├── security/ │ └── data/ │ ├── tests/ ├── docs/ ├── scripts/ └── data/
 
-El objetivo de este repositorio es mantener organizados los diferentes trabajos y proyectos realizados durante **Programación II**, aplicando los conocimientos adquiridos en programación, desarrollo web y desarrollo de aplicaciones empresariales.
+🐍 Módulo Python
 
----
+La carpeta python/ contiene la lógica inicial del proyecto.
 
-**Programación II — Python | Django | Odoo**
+python/ ├── main.py └── models.py
+
+En esta sección se pueden realizar pruebas de lógica, clases y estructuras de datos antes de integrarlas con Django u Odoo.
+
+🌐 Aplicación Django
+
+La carpeta django_app/ contiene la aplicación web desarrollada con Django.
+
+Funcionalidades previstas
+
+Crear proyectos.
+
+Registrar subproyectos.
+
+Asignar responsables.
+
+Definir fechas de inicio y finalización.
+
+Controlar estados.
+
+Consultar proyectos y subproyectos.
+
+Administrar información desde Django Admin.
+
+Modelo principal
+
+Proyecto
+
+Nombre
+
+Descripción
+
+Responsable
+
+Fecha de inicio
+
+Fecha de finalización
+
+Estado
+
+Subproyecto
+
+Proyecto relacionado
+
+Nombre
+
+Descripción
+
+Estado
+
+🟣 Módulo Odoo
+
+La carpeta odoo_module/ está destinada al desarrollo del módulo personalizado para Odoo.
+
+odoo_module/ ├── init.py ├── manifest.py ├── models/ ├── views/ ├── security/ └── data/
+
+El módulo permitirá posteriormente integrar la gestión de proyectos y subproyectos con las funcionalidades empresariales de Odoo.
+
+🗂️ Carpetas adicionales
+
+tests/
+
+Contiene las pruebas del proyecto para comprobar que las funcionalidades desarrolladas funcionan correctamente.
+
+docs/
+
+Contiene la documentación técnica y académica del proyecto.
+
+scripts/
+
+Contiene scripts auxiliares para automatizar tareas del proyecto.
+
+data/
+
+Contiene datos de prueba o información utilizada durante el desarrollo.
+
+🔐 Git y GitHub
+
+El proyecto utiliza Git para controlar las diferentes versiones del código.
+
+Comandos principales:
+
+git status git add . git commit -m "Descripción del cambio" git push
+
+El archivo .gitignore evita subir archivos innecesarios, temporales o privados al repositorio.
+
+Entre los archivos ignorados se encuentran:
+
+Entornos virtuales.
+
+Caché de Python.
+
+Base de datos SQLite.
+
+Archivos .env.
+
+Archivos temporales.
+
+Configuraciones de editores.
+
+Archivos generados automáticamente.
+
+⚙️ Instalación
+
+Clonar el repositorio
+git clone https://github.com/xarviromtaa-ops/programacion_ii_Maya_Xavier.git
+
+Entrar al proyecto
+cd programacion_ii_Maya_Xavier
+
+Crear un entorno virtual
+python3 -m venv .venv
+
+Activar el entorno virtual
+En Linux:
+
+source .venv/bin/activate
+
+Instalar las dependencias
+pip install -r requirements.txt
+
+▶️ Ejecución de Django
+
+Entrar a la aplicación:
+
+cd django_app
+
+Ejecutar el servidor:
+
+python manage.py runserver
+
+Después se puede acceder al servidor local desde:
+
+http://127.0.0.1:8000/
+
+👨‍💻 Autor
+
+Xavier Maya
+
+Materia: Programación II
+
+Proyecto académico para el aprendizaje y aplicación de:
+
+Python
+
+Django
+
+Odoo
+
+Git
+
+GitHub
+
+📚 Estado del proyecto
+
+En desarrollo 🚧
+
+El proyecto se encuentra en proceso de construcción. Se irán agregando nuevas funcionalidades, modelos, vistas, pruebas e integración con Odoo durante el desarrollo de la materia.
+
+📄 Licencia
+
+Proyecto académico desarrollado para fines educativos.

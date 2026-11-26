@@ -1,0 +1,50 @@
+{% extends 'inventario/base.html' %}
+
+{% block title %}Lista de Movimientos{% endblock %}
+
+{% block content %}
+    <h1>Lista de Movimientos</h1>
+
+    {% if perms.inventario.add_movimiento %}
+        <p><a href="{% url 'movimiento_create' %}">Registrar movimiento</a></p>
+    {% endif %}
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Producto</th>
+                <th>Tipo</th>
+                <th>Cantidad</th>
+                <th>Costo Unitario</th>
+                <th>Motivo</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for movimiento in movimientos %}
+            <tr>
+                <td>{{ movimiento.fecha_movimiento }}</td>
+                <td><a href="{% url 'producto_detail' movimiento.producto.pk %}">{{ movimiento.producto.nombre }}</a></td>
+                <td>{{ movimiento.get_tipo_display }}</td>
+                <td>{{ movimiento.cantidad }}</td>
+                <td>${{ movimiento.costo_unitario }}</td>
+                <td>{{ movimiento.motivo }}</td>
+                <td>
+                    <a href="{% url 'movimiento_detail' movimiento.pk %}">Ver</a>
+                    {% if perms.inventario.change_movimiento %}
+                        | <a href="{% url 'movimiento_update' movimiento.pk %}">Editar</a>
+                    {% endif %}
+                    {% if perms.inventario.delete_movimiento %}
+                        | <a href="{% url 'movimiento_delete' movimiento.pk %}">Eliminar</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7">No hay movimientos registrados</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

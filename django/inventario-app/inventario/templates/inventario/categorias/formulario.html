@@ -1,0 +1,16 @@
+{% extends 'inventario/base.html' %}
+
+{% block title %}{%if form.instance.pk%}Editar categoria{% else %}Crear categoria{%endif%}{% endblock %}
+
+{% block content %}
+    <h1>Control de Inventario</h1>
+    <h2>{%if form.instance.pk%}Editar categoria{% else %}Crear categoria{%endif%}</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <p>
+            <button type="submit">Guardar categoria</button>
+            <a href="{% url 'categoria_list' %}">Cancelar</a>
+        </p>
+    </form>
+{% endblock %}

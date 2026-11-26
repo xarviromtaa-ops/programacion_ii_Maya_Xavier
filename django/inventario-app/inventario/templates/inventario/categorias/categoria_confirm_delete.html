@@ -1,0 +1,13 @@
+{% extends 'inventario/base.html' %}
+
+{% block title %}Confirmar eliminacion{% endblock %}
+
+{% block content %}
+    <h1>Confirmar eliminacion</h1>
+    <p>Estas seguro de que quieres eliminar la categoria "{{ categoria.nombre }}"</p>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Eliminar</button>
+        <a href="{% url 'categoria_list' %}">Cancelar</a>
+    </form>
+{% endblock %}
