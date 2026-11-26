@@ -1,0 +1,37 @@
+{% extends 'inventario/base.html' %}
+
+{% block title %}Categorias | Inventario{% endblock %}
+
+{% block content %}
+    <h1>Control de Inventario</h1>
+    <h2>Categorias</h2>
+
+    {% if perms.inventario.add_categoria %}
+        <p><a href="{% url 'categoria_create' %}">Registrar categoria</a></p>
+    {% endif %}
+
+    {% if categorias %}
+        <ul class="lista-categorias">
+            {% for categoria in categorias %}
+                <li class="categoria-card">
+                    <strong><a href="{% url 'categoria_detail' categoria.pk %}">{{ categoria.nombre }}</a></strong>
+                    ({{ categoria.codigo_pasillo }})
+                    {% if categoria.descripcion %}
+                        <p>{{ categoria.descripcion }}</p>
+                    {% endif %}
+                    <p>
+                        <a href="{% url 'categoria_detail' categoria.pk %}">Ver detalle</a>
+                        {% if perms.inventario.change_categoria %}
+                            | <a href="{% url 'categoria_update' categoria.pk %}">Editar</a>
+                        {% endif %}
+                        {% if perms.inventario.delete_categoria %}
+                            | <a href="{% url 'categoria_delete' categoria.pk %}">Eliminar</a>
+                        {% endif %}
+                    </p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aun no hay categorias registradas</p>
+    {% endif %}
+{% endblock %}

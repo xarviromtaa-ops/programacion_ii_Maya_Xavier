@@ -1,0 +1,21 @@
+{% extends 'inventario/base.html' %}
+
+{% block title %}Inicio | Control de Inventario{% endblock %}
+
+{% block content %}
+    <h1>Control de Inventario</h1>
+    {% if user.is_authenticated %}
+        <p>Sesion iniciada como <strong>{{ request.user.get_username }}</strong></p>
+    {% else %}
+        <p>Bienvenido al sistema de inventario puedes consultar el catalogo o iniciar sesion</p>
+    {% endif %}
+    <p>Selecciona el catalogo que deseas consultar:</p>
+    <nav>
+        <ul>
+            <li><a href="{% url 'producto_list' %}">Catalogo de productos</a></li>
+            <li><a href="{% url 'categoria_list' %}">Catalogo de categorias</a></li>
+            <li><a href="{% url 'proveedor_list' %}">Catalogo de proveedores</a></li>
+            <li><a href="{% url 'movimiento_list' %}">Catalogo de movimientos</a></li>
+        </ul>
+    </nav>
+{% endblock %}

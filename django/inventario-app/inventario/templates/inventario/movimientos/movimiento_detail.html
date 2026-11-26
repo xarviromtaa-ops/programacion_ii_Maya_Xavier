@@ -1,0 +1,25 @@
+{% extends 'inventario/base.html' %}
+
+{% block title %}Detalle de Movimiento{% endblock %}
+
+{% block content %}
+    <h1>Detalle de Movimiento</h1>
+    <p><strong>Producto:</strong> <a href="{% url 'producto_detail' movimiento.producto.pk %}">{{ movimiento.producto.nombre }}</a></p>
+    <p><strong>Categoria:</strong> <a href="{% url 'categoria_detail' movimiento.producto.categoria.pk %}">{{ movimiento.producto.categoria.nombre }}</a></p>
+    <p><strong>Tipo:</strong> {{ movimiento.get_tipo_display }}</p>
+    <p><strong>Cantidad:</strong> {{ movimiento.cantidad }}</p>
+    <p><strong>Costo unitario:</strong> ${{ movimiento.costo_unitario }}</p>
+    <p><strong>Fecha:</strong> {{ movimiento.fecha_movimiento }}</p>
+    <p><strong>Motivo:</strong> {{ movimiento.motivo }}</p>
+    <p><strong>Registrado por:</strong> {{ movimiento.creado_por.username }}</p>
+
+    <p>
+        {% if perms.inventario.change_movimiento %}
+            <a href="{% url 'movimiento_update' movimiento.pk %}">Editar</a> |
+        {% endif %}
+        {% if perms.inventario.delete_movimiento %}
+            <a href="{% url 'movimiento_delete' movimiento.pk %}">Eliminar</a> |
+        {% endif %}
+        <a href="{% url 'movimiento_list' %}">Volver a movimientos</a>
+    </p>
+{% endblock %}

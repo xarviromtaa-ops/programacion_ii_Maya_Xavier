@@ -1,0 +1,85 @@
+{% extends 'inventario/base.html' %}
+
+{% block title %}Lista de Productos{% endblock %}
+
+{% block content %}
+    <h1>Lista de Productos</h1>
+
+    {% if perms.inventario.add_producto %}
+        <p>
+            <button><a href="{% url 'producto_create' %}">Crear Nuevo Producto</a></button>
+        </p>
+    {% endif %}
+
+    <form method="GET">
+        <p>
+            <label for="pista">Buscar por nombre:</label>
+            <input type="text" name="pista" id="pista" value="{{ request.GET.pista }}">
+        </p>
+        <p>
+            <label for="categoria">Categoria:</label>
+            <select name="categoria" id="categoria">
+                <option value="">Todas las Categorias</option>
+                {% for categoria in categorias %}
+                    <option value="{{ categoria.id }}"
+                        {% if categoria_id == categoria.id|stringformat:"s" %}
+                            selected
+                        {% endif %}>
+                        {{ categoria.nombre }}
+                    </option>
+                {% endfor %}
+            </select>
+            <button type="submit">Buscar</button>
+        </p>
+    </form>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>SKU</th>
+                <th>Nombre</th>
+                <th>Categoria</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Estado</th>
+                <th>Fecha Ingreso</th>
+                <th>Creado por</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos %}
+            <tr>
+                <td>{{ producto.codigo_sku }}</td>
+                <td><a href="{% url 'producto_detail' producto.pk %}">{{ producto.nombre }}</a></td>
+                <td><a href="{% url 'categoria_detail' producto.categoria.pk %}">{{ producto.categoria.nombre }}</a></td>
+                <td>${{ producto.precio_unitario }}</td>
+                <td>{{ producto.stock_actual }}</td>
+                <td>{{ producto.get_estado_display }}</td>
+                <td>{{ producto.fecha_ingreso }}</td>
+                <td>{{ producto.creado_por.username }}</td>
+                <td>
+                    <a href="{% url 'producto_detail' producto.pk %}">Ver</a>
+                    {% if perms.inventario.change_producto %}
+                        {% if es_administrador or producto.creado_por == user %}
+                            | <a href="{% url 'producto_update' producto.pk %}">Editar</a>
+                        {% endif %}
+                    {% endif %}
+                    {% if perms.inventario.delete_producto %}
+                        | <a href="{% url 'producto_delete' producto.pk %}">Eliminar</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="9">No hay productos disponibles</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="9">Total de Productos: {{ productos|length }}</td>
+            </tr>
+        </tfoot>
+    </table>
+{% endblock %}

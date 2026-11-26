@@ -1,0 +1,12 @@
+{% extends 'inventario/base.html' %}
+
+{% block title %}Acceso Denegado 403{% endblock %}
+
+{% block content %}
+    <h1>403 Acceso Denegado</h1>
+    <p>No tienes permiso para entrar a esta pagina o realizar esta accion</p>
+    {% if exception %}
+        <p style="color: red;">{{ exception }}</p>
+    {% endif %}
+    <p><a href="{% url 'home' %}">Volver al inicio</a></p>
+{% endblock %}

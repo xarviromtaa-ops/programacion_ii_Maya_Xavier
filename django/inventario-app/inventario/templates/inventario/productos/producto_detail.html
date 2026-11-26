@@ -1,0 +1,55 @@
+{% extends 'inventario/base.html' %}
+
+{% block title %}Detalle de Producto{% endblock %}
+
+{% block content %}
+    <h1>Producto: {{ producto.nombre }}</h1>
+    <p><strong>Codigo SKU:</strong> {{ producto.codigo_sku }}</p>
+    <p><strong>Categoria:</strong> <a href="{% url 'categoria_detail' producto.categoria.pk %}">{{ producto.categoria.nombre }}</a></p>
+    <p><strong>Precio unitario:</strong> ${{ producto.precio_unitario }}</p>
+    <p><strong>Stock actual:</strong> {{ producto.stock_actual }} (minimo: {{ producto.stock_minimo }})</p>
+    <p><strong>Estado:</strong> {{ producto.get_estado_display }}</p>
+    <p><strong>Fecha de ingreso:</strong> {{ producto.fecha_ingreso }}</p>
+    <p><strong>Creado por:</strong> {{ producto.creado_por.username }}</p>
+    <p><strong>Descripcion:</strong> {{ producto.descripcion|default:"Sin descripcion" }}</p>
+
+    <p>
+        {% if perms.inventario.change_producto %}
+            {% if es_administrador or producto.creado_por == user %}
+                <a href="{% url 'producto_update' producto.pk %}">Editar</a> |
+            {% endif %}
+        {% endif %}
+        {% if perms.inventario.delete_producto %}
+            <a href="{% url 'producto_delete' producto.pk %}">Eliminar</a> |
+        {% endif %}
+        <a href="{% url 'producto_list' %}">Volver a la lista</a>
+    </p>
+
+    <h2>Proveedores de este producto</h2>
+    {% if proveedores %}
+        <ul>
+            {% for proveedor in proveedores %}
+                <li>
+                    <a href="{% url 'proveedor_detail' proveedor.pk %}">{{ proveedor.nombre }}</a> (RUC: {{ proveedor.ruc }})
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Sin proveedores asignados</p>
+    {% endif %}
+
+    <h2>Movimientos de este producto</h2>
+    {% if movimientos %}
+        <ul>
+            {% for movimiento in movimientos %}
+                <li>
+                    <a href="{% url 'movimiento_detail' movimiento.pk %}">
+                        {{ movimiento.get_tipo_display }} - {{ movimiento.cantidad }} unidades ({{ movimiento.fecha_movimiento }})
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No hay movimientos para este producto</p>
+    {% endif %}
+{% endblock %}

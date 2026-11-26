@@ -1,0 +1,36 @@
+{% extends 'inventario/base.html' %}
+
+{% block title %}Detalle de Proveedor{% endblock %}
+
+{% block content %}
+    <h1>Proveedor: {{ proveedor.nombre }}</h1>
+    <p><strong>RUC:</strong> {{ proveedor.ruc }}</p>
+    <p><strong>Telefono:</strong> {{ proveedor.telefono }}</p>
+    <p><strong>Correo:</strong> {{ proveedor.correo }}</p>
+    <p><strong>Ciudad:</strong> {{ proveedor.ciudad }}</p>
+    <p><strong>Fecha de registro:</strong> {{ proveedor.fecha_registro }}</p>
+
+    <p>
+        {% if perms.inventario.change_proveedor %}
+            <a href="{% url 'proveedor_update' proveedor.pk %}">Editar</a> |
+        {% endif %}
+        {% if perms.inventario.delete_proveedor %}
+            <a href="{% url 'proveedor_delete' proveedor.pk %}">Eliminar</a> |
+        {% endif %}
+        <a href="{% url 'proveedor_list' %}">Volver a proveedores</a>
+    </p>
+
+    <h2>Productos de este proveedor</h2>
+    {% if productos %}
+        <ul>
+            {% for producto in productos %}
+                <li>
+                    <a href="{% url 'producto_detail' producto.pk %}">{{ producto.codigo_sku }} - {{ producto.nombre }}</a>
+                    (<a href="{% url 'categoria_detail' producto.categoria.pk %}">{{ producto.categoria.nombre }}</a>)
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Este proveedor no tiene productos registrados</p>
+    {% endif %}
+{% endblock %}

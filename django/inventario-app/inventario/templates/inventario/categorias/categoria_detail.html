@@ -1,0 +1,34 @@
+{% extends 'inventario/base.html' %}
+
+{% block title %}Detalle de categoria{% endblock %}
+
+{% block content %}
+    <h1>Categoria: {{ categoria.nombre }}</h1>
+    <p><strong>Codigo de pasillo:</strong> {{ categoria.codigo_pasillo }}</p>
+    <p><strong>Descripcion:</strong> {{ categoria.descripcion|default:"Sin descripcion" }}</p>
+    <p><strong>Activa:</strong> {% if categoria.activa %}Si{% else %}No{% endif %}</p>
+
+    <p>
+        {% if perms.inventario.change_categoria %}
+            <a href="{% url 'categoria_update' categoria.pk %}">Editar</a> |
+        {% endif %}
+        {% if perms.inventario.delete_categoria %}
+            <a href="{% url 'categoria_delete' categoria.pk %}">Eliminar</a> |
+        {% endif %}
+        <a href="{% url 'categoria_list' %}">Volver a categorias</a>
+    </p>
+
+    <h2>Productos en esta categoria</h2>
+    {% if productos %}
+        <ul>
+            {% for producto in productos %}
+                <li>
+                    <a href="{% url 'producto_detail' producto.pk %}">{{ producto.codigo_sku }} - {{ producto.nombre }}</a>
+                    (${{ producto.precio_unitario }})
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No hay productos registrados en esta categoria</p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Control de Inventario{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'inventario/css/estilos.css' %}">
+</head>
+<body>
+    <main>
+        <nav>
+            <a class="boton-inicio" href="{% url 'home' %}">← Inicio</a> |
+            <a href="{% url 'producto_list' %}">Productos</a> |
+            <a href="{% url 'categoria_list' %}">Categorias</a> |
+            <a href="{% url 'proveedor_list' %}">Proveedores</a> |
+            <a href="{% url 'movimiento_list' %}">Movimientos</a>
+            |
+            {% if user.is_authenticated %}
+                <span>Sesion iniciada como <strong>{{ request.user.get_username }}</strong></span>
+                <form method="post" action="{% url 'logout' %}" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit">Cerrar sesion</button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}">Iniciar sesion</a> |
+                <a href="{% url 'registro' %}">Registrarse</a>
+            {% endif %}
+        </nav>
+        <hr>
+
+        {% if messages %}
+            {% for message in messages %}
+                <p class="mensaje-exito">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+
+        {% block content %}
+        {% endblock %}
+
+        <hr>
+        <footer>
+            <p>&copy; 2026 Control de Inventario</p>
+        </footer>
+    </main>
+</body>
+</html>

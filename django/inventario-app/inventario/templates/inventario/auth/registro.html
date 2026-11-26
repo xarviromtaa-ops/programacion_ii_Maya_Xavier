@@ -1,0 +1,14 @@
+{% extends 'inventario/base.html' %}
+
+{% block title %}Registro de Usuario{% endblock %}
+
+{% block content %}
+    <h1>REGISTRO DE USUARIO</h1>
+    <h2>Sistema de gestion inventario</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Registrarse</button>
+        <a href="{% url 'login' %}">Cancelar</a>
+    </form>
+{% endblock %}
